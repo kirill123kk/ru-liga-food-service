@@ -13,11 +13,7 @@
     <groupId>ru.liga</groupId>
     <artifactId>delivery-service</artifactId>
     <packaging>jar</packaging>
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+
     <name>delivery</name>
     <dependencies>
         <dependency>
