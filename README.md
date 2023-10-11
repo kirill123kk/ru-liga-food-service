@@ -1,0 +1,1 @@
+http://localhost:8080/restaurant/swagger-ui/index.html?continue#/
