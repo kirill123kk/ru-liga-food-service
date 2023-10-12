@@ -3,10 +3,8 @@ package ru.liga.controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
+import ru.liga.OrderService.OrderService;
 import ru.liga.dto.OrderDto;
-import ru.liga.plug.OrderPlug;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,24 +13,23 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
 
-    OrderPlug orderData =new OrderPlug();
+    private final OrderService orderData =new OrderService();
     @Operation(summary = "Получить заказы")
-    @GetMapping("")
-    public OrderPlug getOrders() {
-        return  orderData;
-
+    @GetMapping("/orders")
+    public List<OrderDto> getOrders() {
+        return orderData.getAllOrders();
     }
 
     @Operation(summary = "Получить заказ по ID")
-    @GetMapping("/{id}")
-    public OrderDto getOrderById(@PathVariable("id") Integer id) {
-        return orderData.getOrderDtoListById(id);
+    @GetMapping("/order/{id}")
+    public OrderDto getOrderById(@PathVariable("id") Long id) {
+        return orderData.getOrderById(id);
     }
 
     @Operation(summary = "Обновить все данные заказа по ID")
     @PutMapping("/update")
-    public String updateOrerById(@RequestBody OrderDto orderDto) {
-        orderData.updateOrderDtoList(orderDto);
+    public String updateOrerById(@PathVariable("id") Long id, @RequestBody OrderDto orderDto) {
+        orderData.changeOrderInfo(id,orderDto);
         return "Заказ изменен";
     }
 
@@ -45,13 +42,10 @@ public class OrderController {
 
     @Operation(summary = "Создать новый заказ")
     @PostMapping("/create")
-    public OrderDto create(@RequestParam Integer id,
-            @RequestParam Integer restrauntId,
-            @RequestParam Integer menuItems) {
+    public OrderDto create(@RequestBody OrderDto orderDto) {
 
-        OrderDto orderDto =new OrderDto();
-        orderDto.setId(id).setSecretPaymentUrl(restrauntId).setEstimatedTimeOfArrival(menuItems);
-        orderData.setOrderDtoList(orderDto);
+
+        orderData.addNewOrder(orderDto);
         return orderDto;
     }
 

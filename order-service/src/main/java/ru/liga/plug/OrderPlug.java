@@ -6,29 +6,34 @@ import lombok.experimental.Accessors;
 import ru.liga.dto.OrderDto;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
 
 public class OrderPlug {
-   public List<OrderDto> orderDtoList  ;
-   public Integer pageIndex=0;
-   public Integer pageCount=10;
-    public OrderPlug(){
-        orderDtoList =new ArrayList<>();
-    }
-    public OrderDto setOrderDtoList(OrderDto orderDto){
+    public HashMap<Long, OrderDto> orderDtoList  ;
+    public Long id;
 
-        orderDtoList.add(orderDto);
+    public OrderPlug(){
+        orderDtoList =new HashMap<>();
+        id = 0L;
+    }
+    public OrderDto addOrderDtoList(OrderDto orderDto){
+
+        orderDtoList.put(Long.valueOf(orderDto.getId()), orderDto);
         return orderDto;
+    }
+    public void setOrderDtoList(OrderDto orderDto){
+
+        orderDtoList.put(Long.valueOf(orderDto.getId()), orderDto);
+
     }
     public void updateOrderDtoList(OrderDto orderDto){
 
-        orderDtoList.set(orderDtoList.indexOf(getOrderDtoListById(orderDto.getId())),orderDto) ;
+        orderDtoList.put(Long.valueOf(orderDto.getId()),orderDto) ;
 
     }
-   public OrderDto getOrderDtoListById(Integer id){
+    public OrderDto getOrderDtoListById(Long id){
 
-       return orderDtoList.stream().filter(tmp->id.equals(tmp.getId())).findFirst().orElse(null);
+       return orderDtoList.get(id);
    }
 
 }
