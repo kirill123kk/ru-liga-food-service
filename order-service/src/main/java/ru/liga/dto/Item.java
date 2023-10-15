@@ -4,10 +4,8 @@ import lombok.Data;
 
 @Data
 public class Item {
-
     private Double price;
-    private Long quantity;
+    private Integer quantity;
     private String description;
     private String image;
-
 }
