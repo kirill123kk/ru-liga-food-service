@@ -18,15 +18,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderAllDto getAllOrders() {
+        orderRepository.findAll();
         return orderRepository.findAll();
     }
 
     @Override
     public OrderDto getOrderById(long id) {
         return orderRepository.findById(id);
-        /*OrderDto orderToGet = repository.orderDtoList.get(id);
-        if(orderToGet == null) throw new OrderErrors("Нет этого ID " + id);
-        else return orderToGet;*/
     }
 
     @Override

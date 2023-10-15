@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-
 public class OrderRepositoryImpl implements OrderRepository {
     private  OrderAllDto orderAllDto;
     public OrderRepositoryImpl(){
@@ -27,17 +26,12 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public Url save(Receipt receipt) {
 
-        OrderDto orderDto = null;
+        OrderDto orderDto = new OrderDto();
         List<OrderDto> temp = orderAllDto.getOrderList();
         orderDto.setId(receipt.getRestrauntId());
-
-
-            temp.add(orderDto);
-
-
+                temp.add(orderDto);
         orderAllDto.setOrderList(temp);
-
-        return new Url();
+        return new Url() ;
     }
 
     @Override

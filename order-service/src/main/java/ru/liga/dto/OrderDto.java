@@ -22,7 +22,7 @@ public class OrderDto {
     private Date Timesamp;
 
     @Schema(description = "Товар")
-    private List<Item> Items;//mass  "price": "","quantity": "","description": "","image": ""
+    private List<Item> Items;
 
 
 }
