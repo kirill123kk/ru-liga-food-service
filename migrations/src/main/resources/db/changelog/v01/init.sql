@@ -3,9 +3,9 @@ create sequence if not exists courers_seq;
 create table if not exists courers
 (
     id bigint not null default nextval ('courers_seq'),
-    phone int not null,
+    phone text not null,
     status text not null,
-    coordinats json not null,
+    coordinats text not null,
     constraint courers_pk primary key (id)
 );
 
@@ -22,7 +22,7 @@ create sequence if not exists customers_seq;
 create table if not exists customers
 (
     id bigint not null default nextval ('customers_seq'),
-    phone int not null,
+    phone text not null,
     email text not null,
     address text not null,
     constraint customers_pk primary key (id)
@@ -63,7 +63,7 @@ comment on column orders.timestamp is 'Время прибытия';
 
 
 
-create sequence if not exists orderItems_seq;
+create sequence if not exists orderitems_seq;
 
 create table if not exists order_items
 (
@@ -110,7 +110,7 @@ create table if not exists restaurant_menu_items
     restaurant_id bigint,
     name text not null,
     price numeric not null,
-    image varchar not null,
+    image text not null,
     description text not null,
     constraint restaurant_menu_items_order_items_fk foreign key (id)
         references order_items(id) ,

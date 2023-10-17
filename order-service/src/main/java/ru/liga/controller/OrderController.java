@@ -5,13 +5,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.liga.dto.OrderAllDto;
-import ru.liga.dto.Receipt;
-import ru.liga.dto.Url;
+import ru.liga.dto.ReceiptDto;
+import ru.liga.dto.UrlDto;
 import ru.liga.service.api.OrderService;
 import ru.liga.dto.OrderDto;
-import ru.liga.status.Status;
-
-import java.util.List;
 
 @Tag(name = "Api для работы с заказами")
 @RestController
@@ -48,7 +45,7 @@ public class OrderController {
 
     @Operation(summary = "Создать новый заказ")
     @PostMapping("/create")
-    public Url create(@RequestBody Receipt receipt) {
+    public UrlDto create(@RequestBody ReceiptDto receipt) {
         return orderService.addNewOrder(receipt);
     }
 

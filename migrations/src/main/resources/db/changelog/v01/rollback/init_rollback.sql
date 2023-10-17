@@ -8,7 +8,7 @@ drop sequence if exists restaurants_seq;
 
 drop table if exists order_items;
 
-drop sequence if exists order_items_seq;
+drop sequence if exists orderitems_seq;
 
 drop table if exists orders;
 

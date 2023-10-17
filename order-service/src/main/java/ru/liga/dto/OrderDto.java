@@ -16,13 +16,13 @@ public class OrderDto {
     private Long Id;
 
     @Schema(description = "Ресторан")
-    private Restaurant RestaurantName;
+    private RestaurantDto restaurantDtoName;
 
     @Schema(description = "Время заказа")
     private Date Timesamp;
 
     @Schema(description = "Товар")
-    private List<Item> Items;
+    private List<ItemDto> Items;
 
 
 }

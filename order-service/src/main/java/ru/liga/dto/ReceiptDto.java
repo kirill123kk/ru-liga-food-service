@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Receipt {
+public class ReceiptDto {
     private Long RestrauntId;
-    private List<MenuItem> menuItems;
+    private List<MenuItemDto> menuItemDtos;
 }

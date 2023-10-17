@@ -1,6 +1,6 @@
 package ru.liga.dto;
 
-public class MenuItem {
+public class MenuItemDto {
 
     private Integer quantity;
 

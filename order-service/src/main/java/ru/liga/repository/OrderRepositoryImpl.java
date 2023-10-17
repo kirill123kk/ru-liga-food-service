@@ -24,14 +24,14 @@ public class OrderRepositoryImpl implements OrderRepository {
     public OrderDto findById(Long id) { return orderAllDto.getOrderList().stream().filter(tmp->id.equals(tmp.getId())).findFirst().orElse(null);}
 
     @Override
-    public Url save(Receipt receipt) {
+    public  UrlDto save(ReceiptDto receipt) {
 
         OrderDto orderDto = new OrderDto();
         List<OrderDto> temp = orderAllDto.getOrderList();
         orderDto.setId(receipt.getRestrauntId());
                 temp.add(orderDto);
         orderAllDto.setOrderList(temp);
-        return new Url() ;
+        return new UrlDto() ;
     }
 
     @Override

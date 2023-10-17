@@ -3,6 +3,6 @@ package ru.liga.dto;
 import lombok.Data;
 
 @Data
-public class Restaurant {
+public class RestaurantDto {
     private String name;
 }

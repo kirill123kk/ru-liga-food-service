@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.liga.dto.OrderAllDto;
 import ru.liga.dto.OrderDto;
-import ru.liga.dto.Receipt;
-import ru.liga.dto.Url;
+import ru.liga.dto.ReceiptDto;
+import ru.liga.dto.UrlDto;
 import ru.liga.exception.OrderServiceException;
 import ru.liga.repository.api.OrderRepository;
 import ru.liga.service.api.OrderService;
@@ -28,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Url addNewOrder(Receipt receipt) {
+    public UrlDto addNewOrder(ReceiptDto receipt) {
         return orderRepository.save(receipt);
     }
 
