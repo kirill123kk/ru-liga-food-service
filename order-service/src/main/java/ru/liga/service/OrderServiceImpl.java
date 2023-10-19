@@ -1,44 +1,48 @@
 package ru.liga.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.liga.dto.OrderAllDto;
 import ru.liga.dto.OrderDto;
-import ru.liga.dto.ReceiptDto;
-import ru.liga.dto.UrlDto;
-import ru.liga.exception.OrderServiceException;
+import ru.liga.model.Order;
 import ru.liga.repository.api.OrderRepository;
 import ru.liga.service.api.OrderService;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
+
+
     @Override
-    public OrderAllDto getAllOrders() {
-        orderRepository.findAll();
-        return orderRepository.findAll();
+    public OrderDto getOrderById(Long id) {
+        Order order = orderRepository.findById(id).orElseThrow();
+        OrderDto orderDto = new OrderDto();
+        orderDto.setId(order.getId());
+        orderDto.setTimestamp(order.getTimestamp());
+
+        return orderDto;
     }
 
     @Override
-    public OrderDto getOrderById(long id) {
-        return orderRepository.findById(id);
+    public List<OrderDto> getOrderByStatus(String status) {
+        List<Order> orderList = orderRepository.findOrderByStatus(status);
+        List<OrderDto> orderDtoList = new ArrayList<>();
+
+        for (Order tmp : orderList) {
+            OrderDto orderDto =new OrderDto();
+            orderDto.setId(tmp.getId());
+            orderDto.setTimestamp(tmp.getTimestamp());
+            orderDtoList.add(orderDto);
+        }
+        return orderDtoList;
     }
 
-    @Override
-    public UrlDto addNewOrder(ReceiptDto receipt) {
-        return orderRepository.save(receipt);
-    }
 
-    @Override
-    public OrderDto changeOrderInfo(long id, OrderDto order) {
-        OrderDto orderToChange = orderRepository.findById(order.getId());
-        if(orderToChange == null) throw new OrderServiceException("Нет этого Id " + order.getId());
-
-
-
-        return orderRepository.update(orderToChange);
-    }
 }

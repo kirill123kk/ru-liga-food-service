@@ -19,7 +19,7 @@ public class OrderDto {
     private RestaurantDto restaurantDtoName;
 
     @Schema(description = "Время заказа")
-    private Date Timesamp;
+    private Date timestamp;
 
     @Schema(description = "Товар")
     private List<ItemDto> Items;

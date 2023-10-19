@@ -1,15 +1,13 @@
 package ru.liga.model;
 
 import lombok.Data;
-import ru.liga.status.Status;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
 @Data
+@Table(name = "restaurants")
 public class Restaurant {
 
 
@@ -17,9 +15,9 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String addres;
+    private String address;
 
-    private Status status;
+    private String status;
 
 
 }

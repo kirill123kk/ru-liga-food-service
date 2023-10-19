@@ -2,13 +2,12 @@ package ru.liga.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 
 @Data
 @Entity
+@Table(name = "order_items")
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +15,7 @@ public class OrderItem {
 
     private long orderId;
 
+    @Column(name = "restaurant_menu_item")
     private long restaurantMenuItems;
 
     private double price;

@@ -1,9 +1,10 @@
 package ru.liga.model;
 
 import lombok.Data;
-import ru.liga.status.Status;
+
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
@@ -21,7 +22,10 @@ public class Order {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurantId;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+
+    private String status;
+
+
+    private Date timestamp;
 
 }

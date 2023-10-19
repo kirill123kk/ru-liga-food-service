@@ -70,7 +70,7 @@ create table if not exists order_items
     id bigint not null default nextval ('orderItems_seq'),
     order_id bigint not null,
     restaurant_menu_item bigint not null,
-    price numeric not null,
+    price double precision not null,
     quantity bigint not null,
     constraint order_items_orders_fk foreign key (order_id)
         references orders(id),
@@ -109,7 +109,7 @@ create table if not exists restaurant_menu_items
     id bigint not null default nextval ('restaurantMenuItems_seq'),
     restaurant_id bigint,
     name text not null,
-    price numeric not null,
+    price double precision not null,
     image text not null,
     description text not null,
     constraint restaurant_menu_items_order_items_fk foreign key (id)

@@ -2,15 +2,11 @@ package ru.liga.model;
 
 import io.swagger.v3.core.util.Json;
 import lombok.Data;
-import ru.liga.status.Status;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "courers")
 public class Courer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +14,7 @@ public class Courer {
 
     private String phone;
 
-    private Status status;
+    private String status;
 
     private String coordinats;
 

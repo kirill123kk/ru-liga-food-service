@@ -5,13 +5,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ru.liga.model.Courer;
 import ru.liga.model.Order;
 
 import java.util.List;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface CourerRepository extends JpaRepository<Courer, Long> {
     @Transactional(readOnly = true)
-    @Query("select ord from Order ord where ord.status = :status")
-    List<Order> findOrderByStatus(@Param("status") String status);
+    @Query("select cuor from Courer cuor where cuor.status = :status")
+    List<Courer> findOrderByStatus(@Param("status") String status);
 }

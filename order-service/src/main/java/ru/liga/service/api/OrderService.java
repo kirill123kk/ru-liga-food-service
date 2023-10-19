@@ -5,10 +5,10 @@ import ru.liga.dto.OrderDto;
 import ru.liga.dto.ReceiptDto;
 import ru.liga.dto.UrlDto;
 
-public interface OrderService {
-    OrderAllDto getAllOrders();
-    OrderDto getOrderById(long id);
+import java.util.List;
 
-    UrlDto addNewOrder(ReceiptDto receipt);
-    OrderDto changeOrderInfo(long id, OrderDto order);
+public interface OrderService {
+    OrderDto getOrderById(Long id);
+
+    List<OrderDto> getOrderByStatus(String status);
 }
