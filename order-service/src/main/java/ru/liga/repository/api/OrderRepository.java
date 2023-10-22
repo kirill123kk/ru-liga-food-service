@@ -14,4 +14,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Transactional(readOnly = true)
     @Query("select ord from Order ord where ord.status = :status")
     List<Order> findOrderByStatus(@Param("status") String status);
+
+
 }

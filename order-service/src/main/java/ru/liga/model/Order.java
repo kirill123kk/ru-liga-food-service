@@ -14,14 +14,17 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customerId;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurantId;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "courier_id")
+    private Courer courer;
 
     private String status;
 

@@ -49,6 +49,11 @@
                <groupId>org.postgresql</groupId>
                <artifactId>postgresql</artifactId>
            </dependency>
+           <dependency>
+               <groupId>ru.liga</groupId>
+               <artifactId>Common</artifactId>
+               <scope>compile</scope>
+           </dependency>
 
 
        </dependencies>

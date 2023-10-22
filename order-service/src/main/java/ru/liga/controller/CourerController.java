@@ -20,11 +20,7 @@ import java.util.List;
 @RequestMapping("/courer")
 @RequiredArgsConstructor
 public class CourerController {
-
-
-
         private final CourerService orderService;
-
 
         @Operation(summary = "Получить курьера по ID")
         @GetMapping("/courer/{id}")

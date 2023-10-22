@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.dto.OrderAllDto;
 import ru.liga.dto.ReceiptDto;
 import ru.liga.dto.UrlDto;
 import ru.liga.service.api.OrderService;
@@ -28,6 +27,12 @@ public class OrderController {
     @GetMapping("/order/{id}")
     public ResponseEntity<OrderDto>  getOrderById(@PathVariable("id") Long id) {
         return ResponseEntity.ok( orderService.getOrderById(id));
+    }
+
+    @Operation(summary = "Создание заказа")
+    @PostMapping("/order/{customers}")
+    public ResponseEntity<UrlDto>  createOrder(@PathVariable("customers") Long customers, @RequestBody ReceiptDto receiptDto) {
+        return ResponseEntity.ok( orderService.setOrder(customers,receiptDto));
     }
     @Operation(summary = "Получить заказ по Status")
     @GetMapping("/order1/{status}")

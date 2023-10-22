@@ -6,6 +6,6 @@ import java.util.List;
 
 @Data
 public class ReceiptDto {
-    private Long RestrauntId;
-    private List<MenuItemDto> menuItemDtos;
+    private Long restrauntId;
+    private List<MenuItemDto> menuItemDto;
 }

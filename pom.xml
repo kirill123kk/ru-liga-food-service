@@ -16,11 +16,12 @@
 	<description>Demo project for Spring Boot</description>
 	<modules>
 		<module>dependency_bom</module>
-		<module> order-service</module>
+		<module>order-service</module>
 		<module>delivery-service</module>
 		<module>kitchen-service</module>
 		<module>notification-service</module>
 		<module>migrations</module>
+		<module>common</module>
 	</modules>
 	<build>
 		<plugins>

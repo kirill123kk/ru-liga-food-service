@@ -21,25 +21,25 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-maven-plugin</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
-    <build>
+    <!--<build>
         <plugins>
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
 
-                <configuration>
+                &lt;!&ndash;<configuration>
                     <changelogSchemaName>${profile.changelogSchemaName}</changelogSchemaName>
                     <propertyFile>${profile.propertyFile}</propertyFile>
                     <changeLogFile>${profile.changeLogFile}</changeLogFile>
-                </configuration>
+                </configuration>&ndash;&gt;
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
     <profiles>
         <profile>

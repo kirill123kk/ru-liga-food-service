@@ -3,15 +3,11 @@ package ru.liga.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.liga.dto.OrderDto;
 import ru.liga.dto.nov.CourerDto;
 import ru.liga.mapper.CourerMapper;
 import ru.liga.model.Courer;
-import ru.liga.model.Order;
 import ru.liga.repository.api.CourerRepository;
-import ru.liga.repository.api.OrderRepository;
 import ru.liga.service.api.CourerService;
-import ru.liga.service.api.OrderService;
 
 import java.util.ArrayList;
 import java.util.List;

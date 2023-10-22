@@ -11,9 +11,8 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 public class OrderDto {
-
     @Schema(description = "Ид заказа")
-    private Long Id;
+    private Long id;
 
     @Schema(description = "Ресторан")
     private RestaurantDto restaurantDtoName;
@@ -23,6 +22,4 @@ public class OrderDto {
 
     @Schema(description = "Товар")
     private List<ItemDto> Items;
-
-
 }

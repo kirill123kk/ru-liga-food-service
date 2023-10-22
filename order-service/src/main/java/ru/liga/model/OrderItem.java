@@ -13,10 +13,13 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long orderId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order orderId;
 
-    @Column(name = "restaurant_menu_item")
-    private long restaurantMenuItems;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_menu_item")
+    private RestaurantMenuItem restaurantMenuItems;
 
     private double price;
 
