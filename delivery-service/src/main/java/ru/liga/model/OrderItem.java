@@ -1,15 +1,19 @@
 package ru.liga.model;
 
-import lombok.Data;
+import lombok.*;
+
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "order_items")
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
@@ -19,8 +23,10 @@ public class OrderItem {
     @JoinColumn(name = "restaurant_menu_item")
     private RestaurantMenuItem restaurantMenuItems;
 
-    private double price;
+    @Column(name = "price")
+    private Double price;
 
-    private long quantity;
+    @Column(name = "quantity")
+    private Long quantity;
 
 }

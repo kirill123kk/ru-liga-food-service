@@ -12,9 +12,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
+
 @Configuration
 public class RoutingMQConfig {
-
+    public static final String QUEUE_1 = "queue1";
     Logger logger = LoggerFactory.getLogger(RoutingMQConfig.class);
     @Bean
     public ConnectionFactory connectionFactory() {

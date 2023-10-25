@@ -1,19 +1,26 @@
 package ru.liga.model;
 
-import lombok.Data;
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "customers")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
+    @Column(name = "phone")
     private String phone;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "address")
     private String address;
 }

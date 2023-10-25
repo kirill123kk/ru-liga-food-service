@@ -19,17 +19,17 @@ import ru.liga.service.api.KitchenService;
 public class KitchenController {
     private final KitchenService kitchenService;
 
-    Logger logger = LoggerFactory.getLogger(KitchenController.class);
+
     @PostMapping("/rabbit")
     public ResponseEntity<String> enit(@RequestBody MessageModel messageModel){
-        logger.info("Emit to myQueue");
+        log.info("Emit to myQueue");
 
         kitchenService.sendInfo(messageModel);
         return ResponseEntity.ok("you");
     }
-    @GetMapping("/feign")
-    public  String test () {
-        return kitchenService.testFeign();
+    @GetMapping("/feign/{id}")
+    public Long getById(@PathVariable("id") Long id) {
+        return id;
     }
 
     @GetMapping("/kitchen/{id}")

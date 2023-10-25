@@ -8,9 +8,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
-    <modules>
-        <module>../Common</module>
-    </modules>
+
     <groupId>ru.liga</groupId>
     <artifactId>dependency_bom</artifactId>
 

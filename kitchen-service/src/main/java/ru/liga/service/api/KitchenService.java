@@ -8,5 +8,4 @@ public interface KitchenService {
     RestaurantDto getRestaurantById (long id);
     String setRestaurant(RestaurantDto restaurantDto);
 
-    String testFeign();
 }

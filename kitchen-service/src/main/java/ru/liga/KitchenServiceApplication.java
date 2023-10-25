@@ -8,7 +8,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-@EnableFeignClients
 public class KitchenServiceApplication {
 
     public static void main(String[] args) {

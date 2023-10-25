@@ -16,8 +16,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RoutingMQConfig {
 
-    //Declarables - Класс объединящий в себе очереди, тип обменника и байдинги(связи)
-    Logger logger = LoggerFactory.getLogger(RoutingMQConfig.class);
+    public static final String QUEUE_1 = "queue1";
+
     @Bean
     public ConnectionFactory connectionFactory() {
         return new CachingConnectionFactory("localhost");
@@ -36,38 +36,8 @@ public class RoutingMQConfig {
     //объявляем очередь с именем queue1
     @Bean
     public Queue myQueue1() {
-        return new Queue("queue1");
+        return new Queue(QUEUE_1);
     }
 
-    //объявляем контейнер, который будет содержать листенер для сообщений
-   /* @Bean
-    public SimpleMessageListenerContainer messageListenerContainer() {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory());
-        container.setQueueNames("queue1");
-        //тут ловим сообщения из queue1
-        container.setMessageListener(message -> logger.info("received from queue1 : " + new String(message.getBody())));
-        return container;
-    }*/
-    /*@Bean
-    public Declarables myQueue() {
-        Queue queueDirectFirst = new Queue("myQueue1", false);
-        Queue queueDirectSecond = new Queue("myQueue2", false);
-        DirectExchange directExchange = new DirectExchange("directExchange");
 
-        return new Declarables(queueDirectFirst, queueDirectSecond, directExchange,
-                BindingBuilder.bind(queueDirectFirst).to(directExchange).with("job.it"),
-                BindingBuilder.bind(queueDirectSecond).to(directExchange).with("job.other"));
-    }*/
-
-    /*@Bean
-    public Declarables myQueueFanout() {
-        Queue queueTopicFirst = new Queue("myTopicQueue1", false);
-        Queue queueTopicSecond = new Queue("myTopicQueue2", false);
-        TopicExchange topicExchange = new TopicExchange("topicExchange");
-
-        return new Declarables(queueTopicFirst, queueTopicSecond, topicExchange,
-                BindingBuilder.bind(queueTopicFirst).to(topicExchange).with("*.other"),
-                BindingBuilder.bind(queueTopicSecond).to(topicExchange).with("*.it"));
-    }*/
 }

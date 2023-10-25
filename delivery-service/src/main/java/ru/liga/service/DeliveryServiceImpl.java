@@ -3,6 +3,7 @@ package ru.liga.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.liga.dto.*;
+import ru.liga.feign.DeliveryFeignClient;
 import ru.liga.model.Courer;
 import ru.liga.model.Order;
 import ru.liga.model.OrderItem;
@@ -23,6 +24,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     private final CourerRepository courerRepository;
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
+    private final DeliveryFeignClient feign;
     @Override
     public DeliveryAllDto getAllDelivers(long id) {
         DeliveryAllDto deliveryAllDto =new DeliveryAllDto();
@@ -68,7 +70,12 @@ public class DeliveryServiceImpl implements DeliveryService {
         Status status = Status.OK;
         return status;
     }
+    @Override
+    public String dropFeign(Long id) {
+        feign.getData(id);
 
+        return "Все успешно";
+    }
     @Override
     public void updateStatusById(long orderId,long courerId) {
 

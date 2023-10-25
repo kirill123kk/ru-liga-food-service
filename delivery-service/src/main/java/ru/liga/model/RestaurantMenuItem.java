@@ -1,24 +1,32 @@
 package ru.liga.model;
 
-import lombok.Data;
+import lombok.*;
+
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "restaurant_menu_items")
 public class RestaurantMenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "restaurant_id")
-    private long restaurantId;
+    private Long restaurantId;
 
+    @Column(name = "name")
     private  String name;
 
-    private double price;
+    @Column(name = "price")
+    private Double price;
 
+    @Column(name = "image")
     private String image;
 
+    @Column(name = "description")
     private  String description;
 }

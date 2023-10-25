@@ -1,20 +1,27 @@
 package ru.liga.model;
 
-import lombok.Data;
+import lombok.*;
+
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "courers")
 public class Courer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
+    @Column(name = "phone")
     private String phone;
 
+    @Column(name = "status")
     private String status;
 
+    @Column(name = "coordinats")
     private String coordinats;
 
 }
