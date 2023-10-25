@@ -18,6 +18,7 @@ import ru.liga.dto.Status;
 import ru.liga.model.MessageModel;
 import ru.liga.rabbit.RoutingMQConfig;
 import ru.liga.service.api.DeliveryService;
+import ru.liga.service.api.RabbitListenerService;
 
 @Tag(name = "Api для работы с доставкой")
 @RestController
@@ -27,12 +28,12 @@ import ru.liga.service.api.DeliveryService;
 public class DeliveryController {
 
     private final DeliveryService deliveryService;
-
+    private final RabbitListenerService rabbitListenerService;
 
     @SneakyThrows
     @RabbitListener(queues = RoutingMQConfig.QUEUE_1)
     public void processMyQueue(MessageModel messageModel) {
-        deliveryService.updateStatusById(messageModel.getOrderId(), messageModel.getCourerId());
+        rabbitListenerService.updateStatusById(messageModel.getOrderId(), messageModel.getCourerId());
         log.info("Received from myQueue1 : " +  messageModel);
     }
     @GetMapping("/feign")
