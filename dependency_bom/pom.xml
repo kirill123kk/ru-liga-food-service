@@ -9,6 +9,7 @@
 
     <packaging>pom</packaging>
 
+
     <groupId>ru.liga</groupId>
     <artifactId>dependency_bom</artifactId>
 
@@ -30,10 +31,31 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <feign.verion>3.0.8</feign.verion>
         <spring-cloud.version>2021.0.8</spring-cloud.version>
+        <webmvc.verion>5.3.30</webmvc.verion>
+        <resours-server>2.7.5</resours-server>
+        <authorization-server>0.3.0</authorization-server>
+        <oauth2-client>2.7.17</oauth2-client>
+
     </properties>
 
     <dependencyManagement>
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+            <version>${oauth2-client}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-authorization-server</artifactId>
+            <version>${authorization-server}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+            <version>${resours-server}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -48,9 +70,14 @@
             <scope>import</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.3.30</version>
+            <version>${webmvc.verion}</version>
         </dependency>
 
 

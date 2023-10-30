@@ -22,7 +22,9 @@
 		<module>notification-service</module>
 		<module>migrations</module>
 		<module>common</module>
-	</modules>
+		<module>authorization-service</module>
+        <module>cloud</module>
+    </modules>
 	<build>
 		<plugins>
 			<plugin>

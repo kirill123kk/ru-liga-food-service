@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 @Tag(name = "Api для работы с заказами")
 @RestController
-@RequestMapping("/order")
+
 @RequiredArgsConstructor
 public class OrderController {
 
@@ -30,7 +30,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Создание заказа")
-    @PostMapping("/order/{customers}")
+    @PostMapping("/orders/{customers}")
     public ResponseEntity<UrlDto>  createOrder(@PathVariable("customers") Long customers, @RequestBody ReceiptDto receiptDto) {
         return ResponseEntity.ok( orderService.setOrder(customers,receiptDto));
     }
@@ -39,35 +39,4 @@ public class OrderController {
     public ResponseEntity<List<OrderDto>>  getOrderByStatus(@PathVariable("status") String status) {
         return ResponseEntity.ok( orderService.getOrderByStatus(status));
     }
-    /*@Operation(summary = "Получить заказы")
-    @GetMapping("/orders")
-    public OrderAllDto getOrders() {
-        return orderService.getAllOrders();
-    }
-
-    @Operation(summary = "Получить заказ по ID")
-    @GetMapping("/order/{id}")
-    public OrderDto getOrderById(@PathVariable("id") Long id) {
-        return orderService.getOrderById(id);
-    }
-
-    @Operation(summary = "Получить отмененные заказы")
-    @GetMapping("/orders?status=active/complete/denied")
-    public OrderAllDto getOrdersDenied( ) {
-        return orderService.getAllOrders();
-    }
-
-    @Operation(summary = "Обновить все данные заказа по ID")
-    @PutMapping("/update/{id}")
-    public String updateOrderById(@PathVariable("id") Long id, @RequestBody OrderDto orderDto) {
-        orderService.changeOrderInfo(id, orderDto);
-        return "Заказ изменен";
-    }
-
-    @Operation(summary = "Создать новый заказ")
-    @PostMapping("/create")
-    public UrlDto create(@RequestBody ReceiptDto receipt) {
-        return orderService.addNewOrder(receipt);
-    }*/
-
 }
