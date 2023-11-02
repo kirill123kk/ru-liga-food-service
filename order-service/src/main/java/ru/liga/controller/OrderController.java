@@ -14,7 +14,6 @@ import ru.liga.dto.OrderDto;
 import java.util.List;
 
 @Slf4j
-@Tag(name = "Api для работы с заказами")
 @RestController
 
 @RequiredArgsConstructor
@@ -26,6 +25,7 @@ public class OrderController {
     @Operation(summary = "Получить заказ по ID")
     @GetMapping("/order/{id}")
     public ResponseEntity<OrderDto>  getOrderById(@PathVariable("id") Long id) {
+        log.info("REST: OrderController: getOrderById("+ id +")-получение заказа по ID");
         return ResponseEntity.ok( orderService.getOrderById(id));
     }
 
