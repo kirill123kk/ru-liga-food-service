@@ -92,6 +92,7 @@ create sequence if not exists restaurants_seq;
 create table if not exists restaurants
 (
     id bigint not null default nextval ('restaurants_seq'),
+    name text not null,
     address text not null,
     status text not null,
     constraint restaurant_pk primary key (id)

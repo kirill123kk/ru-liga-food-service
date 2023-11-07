@@ -8,4 +8,5 @@ public interface DeliveryService {
     DeliveryAllDto getAllDelivers(long id);
     Status create(String phone);
     String dropFeign(Long id);
+    void updateStatusById(long orderId,long courerId);
  }

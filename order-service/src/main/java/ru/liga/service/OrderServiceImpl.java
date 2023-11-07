@@ -7,6 +7,7 @@ import ru.liga.dto.MenuItemDto;
 import ru.liga.dto.OrderDto;
 import ru.liga.dto.ReceiptDto;
 import ru.liga.dto.UrlDto;
+import ru.liga.mapper.OrderItemsMapper;
 import ru.liga.mapper.OrderMapper;
 import ru.liga.model.Order;
 import ru.liga.model.OrderItem;
@@ -34,10 +35,8 @@ public class OrderServiceImpl extends OrderMapper implements OrderService {
     @Override
     public OrderDto getOrderById(Long id) {
         Order order = orderRepository.findById(id).orElseThrow();
-        OrderDto orderDto = new OrderDto();
-        orderDto.setId(order.getId());
-        orderDto.setTimestamp(order.getTimestamp());
-
+        OrderMapper orderMapper=new OrderMapper();
+        OrderDto orderDto = orderMapper.toDto(order);
         return orderDto;
     }
 
@@ -69,16 +68,18 @@ public class OrderServiceImpl extends OrderMapper implements OrderService {
     }
 
     @Override
+    public List<OrderDto> getOrders() {
+        List<Order> orderList = orderRepository.findAll();
+        OrderMapper orderMapper=new OrderMapper();
+        List<OrderDto> orderDtoList = orderMapper.toDtoList(orderList);
+        return orderDtoList;
+    }
+
+    @Override
     public List<OrderDto> getOrderByStatus(String status) {
         List<Order> orderList = orderRepository.findOrderByStatus(status);
-        List<OrderDto> orderDtoList = new ArrayList<>();
-
-        for (Order tmp : orderList) {
-            OrderDto orderDto =new OrderDto();
-            orderDto.setId(tmp.getId());
-            orderDto.setTimestamp(tmp.getTimestamp());
-            orderDtoList.add(orderDto);
-        }
+        OrderMapper orderMapper=new OrderMapper();
+        List<OrderDto> orderDtoList = orderMapper.toDtoList(orderList);
         return orderDtoList;
     }
 

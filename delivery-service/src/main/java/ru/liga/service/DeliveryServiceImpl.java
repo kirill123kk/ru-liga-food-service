@@ -76,6 +76,14 @@ public class DeliveryServiceImpl implements DeliveryService {
 
         return "Все успешно";
     }
+    @Override
+    public void updateStatusById(long orderId,long courerId) {
+
+        courerRepository.updateStatus(courerId,"занят");
+        orderRepository.updateCourier(orderId,courerId);
+        orderRepository.updateStatus(orderId,"доставляется");
+
+    }
 
 
 

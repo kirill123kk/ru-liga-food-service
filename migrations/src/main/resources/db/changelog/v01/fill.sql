@@ -7,12 +7,12 @@ VALUES
     (56655666599,'active' , '"fdsf"');
 
 -- Добавление тестовых данных в таблицу customer
-INSERT INTO restaurants (address, status)
+INSERT INTO restaurants (name,address, status)
 VALUES
-    ('rr d.1 kv 2.', 'active'),
-    ('rr d.2 kv 2.', 'complete'),
-    ('read d.1 kv 2.', 'denied'),
-    ('read d.36 kv 554.', 'denied');
+    ('mac','rr d.1 kv 2.', 'active'),
+    ('papa','rr d.2 kv 2.', 'complete'),
+    ('Bounsuare','read d.1 kv 2.', 'denied'),
+    ('nova','read d.36 kv 554.', 'denied');
 
 -- Добавление тестовых данных в таблицу restaurant
 INSERT INTO customers (phone, email, address)

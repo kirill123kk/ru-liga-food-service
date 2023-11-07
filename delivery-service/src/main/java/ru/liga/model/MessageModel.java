@@ -2,12 +2,12 @@ package ru.liga.model;
 
 import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class MessageModel {
 
     Long orderId;
+
     Long courerId;
 }

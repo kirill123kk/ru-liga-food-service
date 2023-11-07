@@ -31,9 +31,11 @@ public class DeliveryController {
     private final RabbitListenerService rabbitListenerService;
 
     @SneakyThrows
-    @RabbitListener(queues = RoutingMQConfig.QUEUE_1)
-    public void processMyQueue(MessageModel messageModel) {
-        rabbitListenerService.updateStatusById(messageModel.getOrderId(), messageModel.getCourerId());
+    @RabbitListener(queues = "queue1")
+    public void processMyQueue(String message) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        MessageModel messageModel = objectMapper.readValue(message, MessageModel.class);
+        deliveryService.updateStatusById(messageModel.getOrderId(), messageModel.getCourerId());
         log.info("Received from myQueue1 : " +  messageModel);
     }
     @GetMapping("/feign")

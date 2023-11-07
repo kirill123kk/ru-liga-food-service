@@ -35,8 +35,21 @@ public class OrderController {
         return ResponseEntity.ok( orderService.setOrder(customers,receiptDto));
     }
     @Operation(summary = "Получить заказ по Status")
-    @GetMapping("/order1/{status}")
+    @GetMapping("/orders/{status}")
     public ResponseEntity<List<OrderDto>>  getOrderByStatus(@PathVariable("status") String status) {
         return ResponseEntity.ok( orderService.getOrderByStatus(status));
+    }
+
+    @Operation(summary = "Обновление заказа")
+    @PutMapping("/order/update/{id}")
+    public ResponseEntity<OrderDto>  updateOrder(@PathVariable("id") Long id,@RequestBody ReceiptDto receiptDto) {
+        log.info("REST: OrderController: updateOrder("+ id +")-обновление заказа по ID");
+        return ResponseEntity.ok( orderService.getOrderById(id));
+    }
+
+    @Operation(summary = "Получение списка заказов")
+    @GetMapping("/orders/all")
+    public ResponseEntity<List<OrderDto>>  getOrders() {
+        return ResponseEntity.ok( orderService.getOrders());
     }
 }
