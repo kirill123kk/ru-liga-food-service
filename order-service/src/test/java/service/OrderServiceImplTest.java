@@ -19,6 +19,7 @@ import ru.liga.service.api.OrderService;
 
 import java.util.Collections;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -37,14 +38,14 @@ public class OrderServiceImplTest {
     private OrderService orderService;
     @Test
     void testGetOrderById() {
-        when(orderRepository.findById(1L)).thenReturn(Optional.of(new Order()));
-        assertThatThrownBy(() -> orderService.getOrderById(1L))
+        when(orderRepository.findById(UUID.fromString("ds"))).thenReturn(Optional.of(new Order()));
+        assertThatThrownBy(() -> orderService.getOrderById(UUID.fromString("ds")))
                 .isInstanceOf(Exception.class);
     }
     @Test
     void testGetOrderByIdItsTrow() {
-        when(orderRepository.findById(500L)).thenReturn(Optional.of(new Order()));
-        assertThatThrownBy(() -> orderService.getOrderById(500L))
+        when(orderRepository.findById(UUID.fromString("ds"))).thenReturn(Optional.of(new Order()));
+        assertThatThrownBy(() -> orderService.getOrderById(UUID.fromString("ds")))
                 .isInstanceOf(Exception.class);
     }
 }

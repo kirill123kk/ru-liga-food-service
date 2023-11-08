@@ -1,1 +1,1 @@
-http://localhost:8080/restaurant/swagger-ui/index.html?continue#/
+Полный README тут: https://drive.google.com/drive/folders/1-McC79DLFM2GlMfsejA7bpia1g5UqOdY

@@ -12,7 +12,5 @@ import java.util.List;
 
 @Repository
 public interface CourerRepository extends JpaRepository<Courer, Long> {
-    @Transactional(readOnly = true)
-    @Query("select cuor from Courer cuor where cuor.status = :status")
-    List<Courer> findOrderByStatus(@Param("status") String status);
+
 }

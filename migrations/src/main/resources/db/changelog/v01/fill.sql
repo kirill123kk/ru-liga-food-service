@@ -23,21 +23,7 @@ VALUES
     (9645651545,'2323sfsdf@gmail.ru' , 'read d.1 kv 2.'),
     (56655666599,'2323sfsdf@gmail.ru' , 'rr d.3 kv 2.');
 
--- Добавление тестовых данных в таблицу orders
-INSERT INTO orders (customer_id, restaurant_id, status, courier_id)
-VALUES
-    (1, 1, 'active', 1),
-    (2, 2, 'complete', 2),
-    (3, 3, 'denied', 3),
-    (4, 4, 'denied', 4);
 
--- Добавление тестовых данных в таблицу order_items
-INSERT INTO order_items (order_id, restaurant_menu_item,price, quantity)
-VALUES
-    (1, 1,12, 1),
-    (1, 2,20, 2),
-    (3, 3,17, 3),
-    (3, 2,336, 1);
 
 -- Добавление тестовых данных в таблицу restaurant_menu_item
 INSERT INTO restaurant_menu_items (restaurant_id, name, price, description, image)

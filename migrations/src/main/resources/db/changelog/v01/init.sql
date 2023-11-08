@@ -37,11 +37,10 @@ comment on column customers.address is 'Адресс';
 
 
 
-create sequence if not exists order_seq;
-
+create extension if not exists "uuid-ossp";
 create table if not exists orders
 (
-    id bigint not null default nextval ('order_seq'),
+    id uuid not null ,
     customer_id bigint not null,
     restaurant_id bigint not null,
     status text not null,
@@ -60,31 +59,6 @@ comment on column orders.customer_id is 'Ник';
 comment on column orders.restaurant_id is 'Id ресторана';
 comment on column orders.status is 'Статус';
 comment on column orders.timestamp is 'Время прибытия';
-
-
-
-create sequence if not exists orderitems_seq;
-
-create table if not exists order_items
-(
-    id bigint not null default nextval ('orderItems_seq'),
-    order_id bigint not null,
-    restaurant_menu_item bigint not null,
-    price double precision not null,
-    quantity bigint not null,
-    constraint order_items_orders_fk foreign key (order_id)
-        references orders(id),
-    constraint order_items_pk primary key (id)
-);
-
-comment on table order_items is 'Заказы';
-comment on column order_items.id is 'Идентификатор';
-comment on column order_items.order_id is 'Id заказа';
-comment on column order_items.restaurant_menu_item is 'Меню';
-comment on column order_items.price is 'Ценна';
-comment on column order_items.quantity is 'Расположение';
-
-
 
 
 create sequence if not exists restaurants_seq;
@@ -113,8 +87,6 @@ create table if not exists restaurant_menu_items
     price double precision not null,
     image text not null,
     description text not null,
-    constraint restaurant_menu_items_order_items_fk foreign key (id)
-        references order_items(id) ,
     constraint restaurant_menu_items_restaurants_fk foreign key (restaurant_id)
         references restaurants(id) ,
     constraint restaurant_menu_items_pk primary key (id)
@@ -123,9 +95,54 @@ create table if not exists restaurant_menu_items
 comment on table restaurant_menu_items is 'Заказы';
 comment on column restaurant_menu_items.id is 'Идентификатор';
 comment on column restaurant_menu_items.restaurant_id is 'Id заказа';
-comment on column restaurant_menu_items.name is 'Имя ресторана';
+comment on column restaurant_menu_items.name is 'Имя продукта';
 comment on column restaurant_menu_items.price is 'Ценна';
 comment on column restaurant_menu_items.image is 'Картинка';
 comment on column restaurant_menu_items.description is 'Описание';
+
+create sequence if not exists order_pay_seq;
+
+create table if not exists order_pay
+(
+    id bigint not null default nextval ('order_pay_seq'),
+    order_id uuid not null,
+    pay_url text not null,
+    constraint order_pay_orders_fk foreign key (order_id)
+        references orders(id),
+
+    constraint order_pay_pk primary key (id)
+);
+comment on table order_pay is 'оплата';
+comment on column order_pay.id is 'id';
+comment on column order_pay.order_id is 'заказ';
+comment on column order_pay.pay_url is 'url для оплаты';
+
+
+
+
+create sequence if not exists orderitems_seq;
+
+create table if not exists order_items
+(
+    id bigint not null default nextval ('orderItems_seq'),
+    order_id uuid not null,
+    restaurant_menu_item bigint not null,
+    price double precision not null,
+    quantity bigint not null,
+    constraint order_items_orders_fk foreign key (order_id)
+        references orders(id),
+    constraint order_items_restaurant_menu_items_fk foreign key (restaurant_menu_item)
+        references restaurant_menu_items(id),
+    constraint order_items_pk primary key (id)
+);
+
+
+comment on table order_items is 'Заказы';
+comment on column order_items.id is 'Идентификатор';
+comment on column order_items.order_id is 'Id заказа';
+comment on column order_items.restaurant_menu_item is 'Меню';
+comment on column order_items.price is 'Ценна';
+comment on column order_items.quantity is 'Расположение';
+
 
 

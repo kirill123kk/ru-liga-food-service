@@ -1,22 +1,23 @@
 package ru.liga.rabbit.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
-
+@EnableRabbit
 @Configuration
+@Slf4j
 public class RoutingMQConfig {
-    public static final String QUEUE_1 = "queue1";
-    Logger logger = LoggerFactory.getLogger(RoutingMQConfig.class);
+    public static final String ORDER_TO_KITCHEN = "orderToKitchenQueue";
+    public static final String KITCHENTONOTIFICATIONQUEUE = "kitchenToNotification";
+
     @Bean
     public ConnectionFactory connectionFactory() {
         return new CachingConnectionFactory("localhost");
@@ -27,23 +28,33 @@ public class RoutingMQConfig {
         return new RabbitAdmin(connectionFactory());
     }
 
+
+
     @Bean
     public RabbitTemplate rabbitTemplate() {
-        return new RabbitTemplate(connectionFactory());
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        return rabbitTemplate;
     }
 
     @Bean
-    public Queue myQueue1() {
-        return new Queue("queue1");
+    public Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
+        return new Jackson2JsonMessageConverter();
     }
-
     @Bean
-    public SimpleMessageListenerContainer messageListenerContainer() {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory());
-        container.setQueueNames("queue1");
+    public Declarables kitchenToNotification() {
 
-        return container;
+
+        Queue kitchenAcceptToNotification = new Queue(KITCHENTONOTIFICATIONQUEUE, false);
+
+
+        DirectExchange directExchange = new DirectExchange("directExchange");
+
+        return new Declarables(
+                kitchenAcceptToNotification,
+                directExchange,
+                BindingBuilder.bind(kitchenAcceptToNotification).to(directExchange).with(KITCHENTONOTIFICATIONQUEUE)
+        );
     }
 
 }

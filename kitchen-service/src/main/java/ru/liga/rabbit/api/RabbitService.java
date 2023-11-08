@@ -1,7 +1,8 @@
 package ru.liga.rabbit.api;
 
+import ru.liga.dto.RabbitStatusDto;
 import ru.liga.model.MessageModel;
 
 public interface RabbitService {
-    void sendMessage(MessageModel message, String routingKey);
+    void sendMessage(RabbitStatusDto rabbitStatusDto, String routingKey);
 }
