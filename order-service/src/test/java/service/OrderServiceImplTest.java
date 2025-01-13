@@ -48,4 +48,50 @@ public class OrderServiceImplTest {
         assertThatThrownBy(() -> orderService.getOrderById(UUID.fromString("ds")))
                 .isInstanceOf(Exception.class);
     }
+    @Test
+    void testSetOrder() {
+    ReceiptDto receiptDto = new ReceiptDto();
+    receiptDto.setRestrauntId(1L);
+    receiptDto.setMenuItemDto(Arrays.asList(new MenuItemDto()));
+    when(customerRepository.findById(1L)).thenReturn(Optional.of(new Customer()));
+    when(restaurantsRepository.findById(1L)).thenReturn(Optional.of(new Restaurant()));
+    when(menuItemRepository.findById(anyLong())).thenReturn(Optional.of(new RestaurantMenuItem()));
+    UrlDto urlDto = orderService.setOrder(1L, receiptDto);
+    assertNotNull(urlDto);
+    assertNotNull(urlDto.getId());
+    assertNotNull(urlDto.getSecretPaymentUrl());
+    assertNotNull(urlDto.getEstimatedTimeOfArrival());
+    }
+    @Test
+    void testPayForOrder() {
+    UUID orderId = UUID.randomUUID();
+    String paymentUrl = "http://" + orderId;
+    Order order = new Order();
+    order.setId(orderId);
+    order.setStatus(Status.Processed.toString());
+    Pay pay = new Pay();
+    pay.setPayUrl(paymentUrl);
+    order.setPay(pay);
+    when(orderRepository.findById(orderId)).thenReturn(Optional.of(order));
+    orderService.payForOrder(orderId, paymentUrl);
+    verify(orderRepository).updateStatus(orderId, Status.Paid.toString(), null);
+    verify(rabbitService).sendMessage(any(OrderMessDto.class), eq(RoutingMQConfig.ORDER_TO_NOTIFICATION));
+    }
+    @Test
+    void testUpdateOrderById() {
+    UUID orderId = UUID.randomUUID();
+    RabbitStatusDto rabbitStatusDto = new RabbitStatusDto();
+    rabbitStatusDto.setStatus(Status.Paid);
+    rabbitStatusDto.setCourierId(1L);
+    orderService.updateOrderById(orderId, rabbitStatusDto);
+    verify(orderRepository).updateStatus(orderId, Status.Paid.toString(), 1L);
+    }
+    @Test
+    void testGetOrders() {
+    List<Order> orderList = Arrays.asList(new Order(), new Order());
+    when(orderRepository.findAll()).thenReturn(orderList);
+    List<OrderDto> orderDtoList = orderService.getOrders();
+    assertNotNull(orderDtoList);
+    assertEquals(orderList.size(), orderDtoList.size());
+    }
 }
